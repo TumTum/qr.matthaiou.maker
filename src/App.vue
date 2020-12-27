@@ -69,8 +69,13 @@ export default {
       top: 0;
       min-width: 100%;
     }
+
     #printPage {
       z-index: 10;
+    }
+
+    .subtitle a {
+      text-decoration: underline;
     }
   }
 </style>
