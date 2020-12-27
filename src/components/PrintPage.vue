@@ -1,17 +1,21 @@
 <template>
   <div class="qr-page">
-    <div class="pageTitle">{{page_title}}</div>
-    <div class="raster">
 
-      <div v-for="n in 99" :key="n">
-        <div class="qr-code" >
-          <div class="cavas" :data-id="n"><img :src="qrCodePNGData"/></div>
-          <div class="legende">{{qr_legende}}</div>
+    <div class="qr-thema" v-for="qr_counts_id in $store.state.qr_counts" :key="qr_counts_id">
+
+      <div class="pageTitle">{{ $store.state.qr_info[qr_counts_id - 1].title | defaultString(`Title des Abschnit (${qr_counts_id})`) }}</div>
+      <div class="raster">
+        <div v-for="n in $store.state.qr_itmes" :key="n">
+          <div class="qr-code" >
+            <div class="cavas" :data-id="n"><img :src="qrCodePNGData(qr_counts_id - 1)"/></div>
+            <div class="legende">{{ $store.state.qr_info[qr_counts_id - 1].legende | defaultString('Siehe Video') }}</div>
+          </div>
+          <div class="space"></div>
         </div>
-        <div class="space"></div>
       </div>
 
     </div>
+
   </div>
 </template>
 
@@ -19,38 +23,45 @@
 import QRCode from 'qrcode'
 
 export default {
-  props: [
-      'qr_url',
-      'page_title',
-      'qr_legende',
-  ],
-  data() {
-    return {
-      qrdata: '',
+  name: 'Printpage',
+  filters: {
+    defaultString(value, string) {
+      return value ? value : string;
     }
   },
   computed: {
-    qrCodePNGData($self) {
-      if (this.qr_url) {
-        QRCode.toDataURL(
-            this.qr_url,
-            {
-              errorCorrectionLevel: 'L',
-              type: 'image/png',
-              margin: 2,
-              color: {
-                dark: "#000",
-                light: "#fff0"
+    qrCodePNGData: ($self) => (index) => {
+      let newUrl = $self.$store.state.qr_info[index].url,
+          oldUrl = $self.$store.state.qr_info[index].qr.url
+      ;
+
+      if (newUrl !== oldUrl) {
+        if (newUrl === '') {
+          $self.$store.state.qr_info[index].qr.url = '';
+          $self.$store.state.qr_info[index].qr.png = '';
+        }
+        if (newUrl) {
+          QRCode.toDataURL(
+              newUrl,
+              {
+                errorCorrectionLevel: 'L',
+                type: 'image/png',
+                margin: 2,
+                color: {
+                  dark: "#000",
+                  light: "#fff0"
+                }
+              },
+              (err, urlData) => {
+                if (err) throw  err;
+                $self.$store.state.qr_info[index].qr.url = newUrl;
+                $self.$store.state.qr_info[index].qr.png = urlData;
               }
-            },
-            (err, canvas) => {
-              if (err) throw  err;
-              $self.qrdata = canvas;
-            }
-        );
+          );
+        }
       }
 
-      return this.qrdata;
+      return $self.$store.state.qr_info[index].qr.png;
     }
   }
 }
@@ -63,7 +74,12 @@ export default {
     padding: 5mm;
     background-color: #f5f5f5;
     margin: 0 auto;
+
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
   }
+
   .pageTitle {
     font-size: 11pt;
     border-bottom: 1px solid black;
@@ -74,7 +90,6 @@ export default {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    align-content: space-between;
   }
 
   .qr-code {
