@@ -80,6 +80,10 @@ export default {
     align-content: space-between;
   }
 
+  .qr-thema {
+    width: 100%;
+  }
+
   .pageTitle {
     font-size: 11pt;
     border-bottom: 1px solid black;
