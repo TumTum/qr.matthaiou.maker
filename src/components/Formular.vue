@@ -11,35 +11,42 @@
           </ul>
         </div>
       </div>
-      <div class="column is-flex is-flex-direction-column">
-        <button class="button is-light" @click="printMe">Drucken</button>
+      <div class="column is-flex">
+        <Vorlage/>
+        <div class="field" style="margin-left: 1em;">
+          <div class="control">
+            <a class="button is-light" @click="printMe">
+              Drucken
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="field is-horizontal" v-for="n in $store.state.qr_counts" :key="n">
       <div class="field-label is-normal qr-thema-label">
-        <label class="label">{{n}}</label>
+        <label class="label">{{ n }}</label>
       </div>
       <div class="field-body">
         <div class="field" :data-id="n">
-            <div class="control">
-              <input v-model="$store.state.qr_info[n-1].url" placeholder="QR-Url"
-                     type="text" class="input">
-            </div>
+          <div class="control">
+            <input v-model="$store.state.qr_info[n-1].url" placeholder="QR-Url"
+                   type="text" class="input">
+          </div>
         </div>
         <div class="field">
-            <div class="control">
-              <input v-model="$store.state.qr_info[n-1].title"
-                     :placeholder="`Title des Abschnit (${n})`"
-                     type="text" class="input">
-            </div>
+          <div class="control">
+            <input v-model="$store.state.qr_info[n-1].title"
+                   :placeholder="`Title des Abschnit (${n})`"
+                   type="text" class="input">
+          </div>
         </div>
         <div class="field">
-            <div class="control">
-              <input v-model="$store.state.qr_info[n-1].legende"
-                     placeholder="QR-Code legende"
-                     type="text" class="input">
-            </div>
+          <div class="control">
+            <input v-model="$store.state.qr_info[n-1].legende"
+                   placeholder="QR-Code legende"
+                   type="text" class="input">
+          </div>
         </div>
       </div>
     </div>
@@ -48,34 +55,39 @@
 
 <script>
 
+import Vorlage from './Vorlagen'
+
 export default {
   name: 'Formular',
+  components: {
+      Vorlage
+  },
   methods: {
     printMe() {
       window.print();
     },
     oneQR() {
       this.$store.commit('oneQR')
-      this.$nextTick( () => this.$emit('printpage-top') )
+      this.$nextTick(() => this.$emit('printpage-top'))
     },
     twoQR() {
       this.$store.commit('twoQR')
-      this.$nextTick( () => this.$emit('printpage-top') )
+      this.$nextTick(() => this.$emit('printpage-top'))
     },
     treeQR() {
       this.$store.commit('treeQR')
-      this.$nextTick( () => this.$emit('printpage-top') )
+      this.$nextTick(() => this.$emit('printpage-top'))
     },
     eightQR() {
       this.$store.commit('eightQR')
-      this.$nextTick( () => this.$emit('printpage-top') )
+      this.$nextTick(() => this.$emit('printpage-top'))
     },
   },
 }
 </script>
 
 <style>
-  .qr-thema-label {
-    flex: none;
-  }
+.qr-thema-label {
+  flex: none;
+}
 </style>

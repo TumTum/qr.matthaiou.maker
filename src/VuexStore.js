@@ -1,7 +1,6 @@
 import Vuex from 'vuex'
 
-export default {
-    init(Vue) {
+export default (Vue) => {
         Vue.use(Vuex)
 
         return new Vuex.Store({
@@ -36,7 +35,15 @@ export default {
                     state.qr_counts = 8
                     state.qr_itmes = 9
                 },
+                loadVorlage(state, vorlage) {
+                    state.qr_counts = vorlage.data.qr_counts
+                    state.qr_itmes = vorlage.data.qr_itmes
+                    vorlage.data.qr_info.map((qrinfo, index) => {
+                        state.qr_info[index].url = qrinfo.url
+                        state.qr_info[index].title = qrinfo.title
+                        state.qr_info[index].legende = qrinfo.legende
+                    });
+                },
             }
         })
-    }
 }
