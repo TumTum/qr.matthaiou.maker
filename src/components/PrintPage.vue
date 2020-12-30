@@ -44,7 +44,7 @@ export default {
           QRCode.toDataURL(
               newUrl,
               {
-                errorCorrectionLevel: 'L',
+                errorCorrectionLevel: 'M',
                 type: 'image/png',
                 margin: 2,
                 color: {

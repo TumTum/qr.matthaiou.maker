@@ -6,8 +6,8 @@
         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2">
           <span>Vorlage</span>
           <span class="icon is-small">
-                <i class="fas fa-angle-down" aria-hidden="true"></i>
-              </span>
+            <font-awesome-icon icon="angle-down" />
+          </span>
         </button>
       </div>
       <div class="dropdown-menu " role="menu">
@@ -22,7 +22,7 @@
               <div class="control">
                 <button class="button" :disabled="disableSaveButton" @click="saveVorlagen">
                       <span class="icon">
-                        <i class="fas fa-save"></i>
+                        <font-awesome-icon icon="save" />
                       </span>
                 </button>
               </div>
@@ -43,10 +43,10 @@
             <div class="is-flex is-justify-content-space-between is-align-items-baseline">
               <div class="vorlagen-name">{{item.title}}</div>
               <button class="button is-small" @click.stop="updateVorlage(item.key)" v-if="item.key === activeVorlage" title="Aktualisieren">
-                    <span class="icon is-small"><i class="fas fa-sync-alt"></i></span>
+                    <span class="icon is-small"><font-awesome-icon icon="sync-alt"/></span>
               </button>
               <button class="button is-small" @click.stop="removeVorlage(item.key)" v-if="item.key !== activeVorlage" title="Löschen">
-                    <span class="icon is-small"><i class="fas fa-trash"></i></span>
+                    <span class="icon is-small"><font-awesome-icon icon="trash"/></span>
               </button>
             </div>
           </a>

@@ -21,18 +21,23 @@
     <section id="printPage" :style="{'margin-top': pageprint_top + 'px'}">
       <PrintPage/>
     </section>
+    <footer id="footer">
+      <Footer/>
+    </footer>
   </div>
 </template>
 
 <script>
 import Formular from './components/Formular.vue'
 import PrintPage from './components/PrintPage.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   name: 'App',
   components: {
     Formular,
-    PrintPage
+    PrintPage,
+    Footer,
   },
   data() {
     return {
@@ -54,7 +59,7 @@ export default {
   @import "../node_modules/bulma/css/bulma.min.css";
 
   @media print {
-    .no-print, #header {
+    .no-print, #header, #footer {
       display: none;
     }
     #printPage {
