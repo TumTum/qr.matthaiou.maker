@@ -7,6 +7,7 @@
             <li :class="{'is-active': $store.state.qr_counts === 1}"><a @click="oneQR">1x QR Thema</a></li>
             <li :class="{'is-active': $store.state.qr_counts === 2}"><a @click="twoQR">2x QR Themen</a></li>
             <li :class="{'is-active': $store.state.qr_counts === 3}"><a @click="treeQR">3x QR Themen</a></li>
+            <li :class="{'is-active': $store.state.qr_counts === 4}"><a @click="fourQR">4x QR Themen</a></li>
             <li :class="{'is-active': $store.state.qr_counts === 8}"><a @click="eightQR">8x QR Themen</a></li>
           </ul>
         </div>
@@ -76,6 +77,10 @@ export default {
     },
     treeQR() {
       this.$store.commit('treeQR')
+      this.$nextTick(() => this.$emit('printpage-top'))
+    },
+    fourQR() {
+      this.$store.commit('fourQR')
       this.$nextTick(() => this.$emit('printpage-top'))
     },
     eightQR() {

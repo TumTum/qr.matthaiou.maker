@@ -31,6 +31,10 @@ export default (Vue) => {
                     state.qr_counts = 3
                     state.qr_itmes = 27
                 },
+                fourQR(state) {
+                    state.qr_counts = 4
+                    state.qr_itmes = 18
+                },
                 eightQR(state) {
                     state.qr_counts = 8
                     state.qr_itmes = 9
