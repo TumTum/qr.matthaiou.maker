@@ -1,8 +1,10 @@
 <template>
   <div class="qr-page">
+    <div class="totalQR">
+      QR's: {{totalQR()}}
+    </div>
 
     <div class="qr-thema" v-for="qr_counts_id in $store.state.qr_counts" :key="qr_counts_id">
-
       <div class="pageTitle">{{ $store.state.qr_info[qr_counts_id - 1].title | defaultString(`Title des Abschnit (${qr_counts_id})`) }}</div>
       <div class="raster">
         <div v-for="n in $store.state.qr_itmes" :key="n">
@@ -28,6 +30,11 @@ export default {
     defaultString(value, string) {
       return value ? value : string;
     }
+  },
+  methods: {
+    totalQR() {
+      return this.$store.state.qr_counts * this.$store.state.qr_itmes;
+    },
   },
   computed: {
     qrCodePNGData: ($self) => (index) => {
@@ -69,6 +76,8 @@ export default {
 
 <style scoped>
   .qr-page {
+
+    position: relative;
     width: 21cm;
     height: 29.6cm;
     padding: 5mm;
@@ -78,6 +87,13 @@ export default {
     display: flex;
     flex-flow: row wrap;
     align-content: space-between;
+  }
+
+  .totalQR {
+    position: absolute;
+    right: 5mm;
+    text-align: right;
+    font-size: 0.7em;
   }
 
   .qr-thema {
