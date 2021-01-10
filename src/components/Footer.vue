@@ -92,6 +92,14 @@
             <a href="https://github.com/soldair/node-qrcode#error-correction-level">Quelle</a>
           </div>
         </article>
+        <article class="message is-small">
+          <div class="message-header">
+            <p>Kann ich diese Seite selber hosten?</p>
+          </div>
+          <div class="message-body">
+            Ja. Der Quell-Code zu dieser Seite ist veröffentlicht auf <a href="https://github.com/TumTum/qr.matthaiou.maker">GitHub</a>
+          </div>
+        </article>
       </div>
     </modal>
 
